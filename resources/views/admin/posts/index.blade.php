@@ -14,9 +14,9 @@
             <tbody>
                 @forelse ($posts as $post)
                     <tr>
-                        <td>{{ $post->title }}</td>
-                        <td>{{ $post->created_at }}</td>
-                        <td><a href="{{ route('admin.posts-show', $post->id) }}" class="btn btn-primary"></a></td>
+                        <td>{{ $post->title, 50 }}</td>
+                        <td>{{ $post->getFormattedDate('created_at') }}</td>
+                        <td><a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary">Mostra</a></td>
                     </tr>
                 @empty
                     <tr>

@@ -13,14 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.home');
-});
 
 Auth::routes(['register' => false]);
+
+// ROTTE CHE NECESSITANO AUTENTICAZIONE
 
 Route::middleware('auth')->name('admin.')->prefix('admin')->namespace('Admin')->group(function(){
     //Rotte protette
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('posts', 'PostController');
 });
+
+
+//gESTIAMO LE ROTTE CHE NON SONO DI AUTH NE DI ADMIN
+
+Route::get('{any?}', function () {
+    return view('guest.home');
+})->where('any', '.*');
