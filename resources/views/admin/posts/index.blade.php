@@ -25,5 +25,8 @@
                 @endforelse
             </tbody>
         </table>
+        <footer class="d-flex justify-content-center">
+            {{ $posts->links() }}
+        </footer>
     </div>
 @endsection
