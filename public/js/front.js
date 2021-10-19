@@ -37603,7 +37603,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card text-center" }, [
             _c("div", { staticClass: "card-header" }, [
               _c("h1", [_vm._v("Welcome to this website")])
             ]),
