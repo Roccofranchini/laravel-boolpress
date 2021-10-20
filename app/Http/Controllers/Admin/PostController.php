@@ -26,7 +26,11 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        //creiamo un'istanza vuota per gestire il doppio form per creare/modificare gli elementi
+        $post = new Post();
+
+        // Per creare una nuova entità restituiamo una view create con l'apposito form
+        return view('admin.posts.create', compact('post'));
     }
 
     /**
@@ -37,7 +41,31 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // VALIDAZIONE
+        $request->validate([
+            'title' => 'required|string|unique:posts|max:50',
+            'content' => 'required|string',
+            'price' => 'string'
+        ],
+            //messagi degli errori
+        [
+            'required' =>"You must fill the :attribute field",
+            'title.unique' => "Il titolo '$request->title' è già stato usato"
+        ]);
+
+        //raccogliamo utti i dati dellla request
+        $data = $request->all();
+        //creiamo una nuova istanza
+        $post = new Post();
+        //la rempiamo con i dati ricevuti
+        // $post->fill($data);
+        //salviamo
+        // $post->save();
+
+        //OPPURE
+        $post = Post::create($data);
+        //restituiamo la view della nuova entità creata
+        return redirect()->route('admin.posts.show', $post-> id);
     }
 
     /**
@@ -57,9 +85,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -69,9 +97,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->all();
+
+        $post->update($data);
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -80,8 +111,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('admin.posts.index')->with('delete', $post->title);
     }
 }

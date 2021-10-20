@@ -1,23 +1,18 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card text-center">
-                    <div class="card-header">
-                        <h1>Welcome to this website</h1>
-                    </div>
-
-                    <div class="card-body">
-                        <p>sito in costruzione</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div>
+        <Header />
+        <Main />
     </div>
 </template>
 
 <script>
+import Header from "./Header.vue";
+import Main from "./Main.vue";
 export default {
-    name: "App"
+    name: "App",
+    components: {
+        Header,
+        Main
+    }
 };
 </script>
