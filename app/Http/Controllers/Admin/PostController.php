@@ -47,7 +47,9 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|unique:posts|max:50',
             'content' => 'required|string',
-            'price' => 'string'
+            'price' => 'string',
+            'category-id' => 'nullable|exists:categories,id'
+            //se selezioniamo una delle categorie del db metterà l'id di questa, altrimenti sarà null
         ],
             //messagi degli errori
         [
