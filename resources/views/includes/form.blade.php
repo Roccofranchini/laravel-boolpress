@@ -27,11 +27,20 @@ Laravel, specificato "submit" come type del nostro button e indicando nell'actio
      <input type="text" class="form-control" id="iamge" name="iamge" value="{{ old('iamge', $post->image) }}"
          placeholder="">
  </div>
- <div class="mb-3 col-8 offset-2 px-4">
+ <div class="mb-3 col-8  px-4">
      <label for="content" class="form-label">Descrizione</label>
      <textarea class="form-control @error('title') is-invalid @enderror" id="content" name="content"
          rows="3">{{ old('content', $post->content) }}</textarea>
      <div class="invalid-feedback">Inserire la descrizione del Post</div>
+ </div>
+ <div class="mb-3 col-4 px-4">
+     <label for="category_id">Categoria</label>
+     <select class="form-control" id="category_id" name="category_id">
+         <option>nessuna categoria</option>
+         @foreach ($categories as $category)
+             <option value="{{ $category->id }}">{{ $category->name }}</option>
+         @endforeach
+     </select>
  </div>
  <div class="col-12 d-flex justify-content-between">
      <button type="submit" class="btn btn-dark text-center d-block">@yield('aggiungi-modifica')</button>

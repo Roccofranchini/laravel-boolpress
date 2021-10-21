@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,10 @@ class PostController extends Controller
     {
         //creiamo un'istanza vuota per gestire il doppio form per creare/modificare gli elementi
         $post = new Post();
+        $categories = Category::all();
 
         // Per creare una nuova entità restituiamo una view create con l'apposito form
-        return view('admin.posts.create', compact('post'));
+        return view('admin.posts.create', compact('post', 'categories'));
     }
 
     /**
