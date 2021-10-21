@@ -10,6 +10,7 @@
             <thead>
                 <tr>
                     <th scope="col">Title</th>
+                    <th scope="col">Categoria</th>
                     <th scope="col">Pubblicato il</th>
                     <th scope="col"></th>
                 </tr>
@@ -17,9 +18,15 @@
             <tbody>
                 @forelse ($posts as $post)
                     <tr>
-                        <td>{{ $post->title, 50 }}</td>
-                        <td>{{ $post->getFormattedDate('created_at') }}</td>
+                        <td>{{ $post->title }}</td>
                         <td>
+                            @if ($post->category)
+                                {{ $post->category->name }}
+                            @else
+                                -
+                            @endif
+                        </td>
+                        <td class="text-right">
                             <form method="POST" action="{{ route('admin.posts.destroy', $post->id) }}"
                                 class="delete-form d-inline-block" data-post="{{ $post->title }}">
                                 @csrf
