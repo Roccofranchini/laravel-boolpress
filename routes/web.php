@@ -22,6 +22,7 @@ Route::middleware('auth')->name('admin.')->prefix('admin')->namespace('Admin')->
     //Rotte protette
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('posts', 'PostController');
+    Route::resource('categories', 'CategoryController');
 });
 
 
