@@ -47,6 +47,15 @@
         <footer class="d-flex justify-content-center">
             {{ $posts->links() }}
         </footer>
+        <section id="posts_by-categories">
+            <div class="row">
+                @foreach ($categories as $category)
+                    <div class="col-4 mb-3">
+                        <h4>{{ $category->name }}</h4>
+                    </div>
+                @endforeach
+            </div>
+        </section>
     </div>
 
 
