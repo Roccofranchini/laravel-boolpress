@@ -23,11 +23,15 @@
                                 <a class="page-link">Previous</a>
                             </li>
                             <li
-                                v-for="i in pagination.lastPage"
-                                :key="i"
+                                v-for="n in pagination.lastPage"
+                                :key="n"
                                 class="page-item"
+                                :class="
+                                    n === pagination.currentPage ? 'active' : ''
+                                "
+                                @click="getPosts(n)"
                             >
-                                <a class="page-link">{{ i }}</a>
+                                <a class="page-link">{{ n }}</a>
                             </li>
                             <li
                                 class="page-item"
@@ -91,6 +95,7 @@ export default {
                 })
                 .then(() => {
                     this.isLoading = false;
+                    console.log(this.posts);
                 });
         }
     },

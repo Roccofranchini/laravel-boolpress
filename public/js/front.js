@@ -2054,6 +2054,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2096,6 +2100,7 @@ __webpack_require__.r(__webpack_exports__);
         console.error(err);
       }).then(function () {
         _this.isLoading = false;
+        console.log(_this.posts);
       });
     }
   },
@@ -2129,9 +2134,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'PostCard',
-  props: ['post']
+  name: "PostCard",
+  props: ["post"]
 });
 
 /***/ }),
@@ -38693,13 +38705,25 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
-                          _vm._l(_vm.pagination.lastPage, function(i) {
+                          _vm._l(_vm.pagination.lastPage, function(n) {
                             return _c(
                               "li",
-                              { key: i, staticClass: "page-item" },
+                              {
+                                key: n,
+                                staticClass: "page-item",
+                                class:
+                                  n === _vm.pagination.currentPage
+                                    ? "active"
+                                    : "",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.getPosts(n)
+                                  }
+                                }
+                              },
                               [
                                 _c("a", { staticClass: "page-link" }, [
-                                  _vm._v(_vm._s(i))
+                                  _vm._v(_vm._s(n))
                                 ])
                               ]
                             )
@@ -38763,11 +38787,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card my-4 shadow-lg" }, [
     _c("div", { staticClass: "card-header" }, [
-      _vm._v("\n    " + _vm._s(_vm.post.title) + "\n  ")
+      _vm._v("\n        " + _vm._s(_vm.post.title) + "\n    ")
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("blockquote", { staticClass: "blockquote mb-0" }, [
+        _c("h4", [
+          _vm._v("\n                Categoria:\n                "),
+          _vm.post.category.name !== null
+            ? _c("span", [_vm._v(_vm._s(_vm.post.category.name))])
+            : _c("span", [_vm._v("Nessuna")])
+        ]),
+        _vm._v(" "),
         _c("p", [_vm._v(_vm._s(_vm.post.content))]),
         _vm._v(" "),
         _c("footer", { staticClass: "blockquote-footer" }, [
