@@ -51,7 +51,21 @@
             <div class="row">
                 @foreach ($categories as $category)
                     <div class="col-4 mb-3">
-                        <h4>{{ $category->name }}</h4>
+                        <div class="card h-100" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $category->name }}</h5>
+                                <ul class="card-text pl-0">
+                                    @forelse ($category->posts as $post)
+                                        <li class="list-unstyled">
+                                            <a class="text-decoration-none"
+                                                href="{{ route('admin.posts.show', $post->id) }}">{{ $post->title }}</a>
+                                        </li>
+                                    @empty
+                                        <li class="list-unstyled">Nessun post in questa categoria.</li>
+                                    @endforelse
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
