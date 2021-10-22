@@ -23,8 +23,8 @@ Laravel, specificato "submit" come type del nostro button e indicando nell'actio
      <div class="invalid-feedback">Inserire il titolo del Post</div>
  </div>
  <div class="mb-3 col-6 px-4">
-     <label for="iamge" class="form-label">Image</label>
-     <input type="text" class="form-control" id="iamge" name="iamge" value="{{ old('iamge', $post->image) }}"
+     <label for="image" class="form-label">Image</label>
+     <input type="text" class="form-control" id="image" name="image" value="{{ old('image', $post->image) }}"
          placeholder="">
  </div>
  <div class="mb-3 col-8  px-4">
