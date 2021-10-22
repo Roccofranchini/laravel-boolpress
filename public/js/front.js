@@ -38794,7 +38794,7 @@ var render = function() {
       _c("blockquote", { staticClass: "blockquote mb-0" }, [
         _c("h4", [
           _vm._v("\n                Categoria:\n                "),
-          _vm.post.category.name !== null
+          _vm.post.category !== null
             ? _c("span", [_vm._v(_vm._s(_vm.post.category.name))])
             : _c("span", [_vm._v("Nessuna")])
         ]),

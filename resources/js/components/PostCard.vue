@@ -7,7 +7,7 @@
             <blockquote class="blockquote mb-0">
                 <h4>
                     Categoria:
-                    <span v-if="post.category.name !== null">{{
+                    <span v-if="post.category !== null">{{
                         post.category.name
                     }}</span>
                     <span v-else>Nessuna</span>
