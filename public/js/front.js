@@ -2051,6 +2051,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -38638,7 +38641,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("main", [
+  return _c("main", { attrs: { id: "main" } }, [
     _c("div", { staticClass: "container" }, [
       _c("h1", { staticClass: "text-center my-3" }, [_vm._v("ARTICOLI")]),
       _vm._v(" "),
@@ -38660,7 +38663,10 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "nav",
-                    { attrs: { "aria-label": "Page navigation example" } },
+                    {
+                      staticClass: " d-flex justify-content-center",
+                      attrs: { "aria-label": "Page navigation example" }
+                    },
                     [
                       _c(
                         "ul",

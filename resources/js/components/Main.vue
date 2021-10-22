@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main id="main">
         <div class="container">
             <h1 class="text-center my-3">ARTICOLI</h1>
             <div class="row flex-column">
@@ -10,7 +10,10 @@
                         :key="post.id"
                         :post="post"
                     />
-                    <nav aria-label="Page navigation example">
+                    <nav
+                        aria-label="Page navigation example"
+                        class=" d-flex justify-content-center"
+                    >
                         <ul class="pagination">
                             <li
                                 class="page-item"
