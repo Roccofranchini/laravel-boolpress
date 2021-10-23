@@ -25,12 +25,28 @@ Laravel, specificato "submit" come type del nostro button e indicando nell'actio
 
  <div class="mb-3 col-6 px-4">
      <label for="color" class="form-label">Color</label>
-     <input type="text" class="form-control" id="color" name="color" value="{{ old('color', $category->color) }}"
-         placeholder="">
+     <select name="color" class="form-control" id="color">
+         <option>Nessuna categoria</option>
+         <option @if (old('color', $category->color) && old('color', $category->color) == $category->color) selected
+
+             @endif value="success">Verde</option>
+         <option @if (old('color', $category->color) && old('color', $category->color) == $category->color) selected
+
+             @endif value="danger">Rosso</option>
+         <option @if (old('color', $category->color) && old('color', $category->color) == $category->color) selected
+
+             @endif value="primary">Blue</option>
+         <option @if (old('color', $category->color) && old('color', $category->color) == $category->color) selected
+
+             @endif value="warning">Giallo</option>
+         <option @if (old('color', $category->color) && old('color', $category->color) == $category->color) selected
+
+             @endif value="secondary">Grigio</option>
+     </select>
  </div>
 
- <div class="col-12 d-flex justify-content-between">
-     <button type="submit" class="btn btn-dark text-center d-block">@yield('aggiungi-modifica')</button>
-     <a href="{{ URL::previous() }}" class="btn btn-primary">Indietro</a>
+ <div class="col-12 text-center my-4">
+     <button type="submit" class="btn btn-dark">@yield('aggiungi-modifica')</button>
  </div>
+
  </form>

@@ -12,6 +12,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Colore</th>
+                    <th scope="col">N° Posts</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -20,6 +21,17 @@
                     <tr>
                         <th>{{ $category->id }}</th>
                         <td>{{ $category->name }}</td>
+                        <td><span
+                                class="badge badge-pill badge-{{ $category->color ?? 'light' }}">{{ $category->color ?? '-' }}</span>
+                        </td>
+                        <td>
+                            @if ($category->posts)
+                                {{ count($category->posts) }}
+
+                            @else
+                                nessuno
+                            @endif
+                        </td>
                         <td class="text-right">
                             <form method="POST" action="{{ route('admin.categories.destroy', $category->id) }}"
                                 class="delete-form d-inline-block" data-post="{{ $category->name }}">

@@ -21,10 +21,14 @@
                         <td>{{ $post->title }}</td>
                         <td>
                             @if ($post->category)
-                                <span class="badge badge-pill badge-info px-3">{{ $post->category->name }}</span>
+                                <span
+                                    class="badge badge-pill badge-{{ $category->color ?? 'light' }} px-3">{{ $post->category->name }}</span>
                             @else
                                 -
                             @endif
+                        </td>
+                        <td>
+                            {{ $post->created_at }}
                         </td>
                         <td class="text-right">
                             <form method="POST" action="{{ route('admin.posts.destroy', $post->id) }}"

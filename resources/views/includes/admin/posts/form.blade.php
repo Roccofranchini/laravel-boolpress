@@ -44,8 +44,7 @@ Laravel, specificato "submit" come type del nostro button e indicando nell'actio
          @endforeach
      </select>
  </div>
- <div class="col-12 d-flex justify-content-between">
-     <button type="submit" class="btn btn-dark text-center d-block">@yield('aggiungi-modifica')</button>
-     <a href="{{ URL::previous() }}" class="btn btn-primary">Indietro</a>
+ <div class="col-12 text-center my-4">
+     <button type="submit" class="btn btn-dark">@yield('aggiungi-modifica')</button>
  </div>
  </form>

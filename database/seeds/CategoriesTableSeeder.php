@@ -12,14 +12,22 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $category_names = ['HTML', 'CSS', 'PHP', 'VueJS', 'Laravel', 'JS'];
+        $categories = [
+            ['name' => 'HTML', 'color' => 'danger'],
+            ['name' => 'CSS', 'color' => 'warning'],
+            ['name' => 'PHP', 'color' => 'primary'],
+            ['name' => 'VueJS', 'color' => 'success'],
+            ['name' => 'Laravel', 'color' => 'secondary'],
+            ['name' => 'JS', 'color' => 'warning']
+    ];
 
-        foreach($category_names as $name) {
-            $category = new  Category();
+        foreach($categories as $category) {
+            $newCategory = new  Category();
 
-            $category->name = $name;
+            $newCategory->name = $category['name'];
+            $newCategory->color = $category['color'];
 
-            $category->save();
+            $newCategory->save();
         }
     }
 }
