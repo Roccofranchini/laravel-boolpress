@@ -2141,9 +2141,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
-  props: ["post"]
+  props: ["post"],
+  methods: {
+    getFormattedDate: function getFormattedDate(date) {
+      var PostDate = new Date(date);
+      var day = PostDate.getDate();
+      var month = PostDate.getMonth() + 1;
+      var year = PostDate.getFullYear();
+      return "".concat(day, "/").concat(month, "/").concat(year);
+    }
+  }
 });
 
 /***/ }),
@@ -38795,14 +38809,25 @@ var render = function() {
         _c("h4", [
           _vm._v("\n                Categoria:\n                "),
           _vm.post.category !== null
-            ? _c("span", [_vm._v(_vm._s(_vm.post.category.name))])
+            ? _c(
+                "span",
+                {
+                  staticClass: "badge badge-pill",
+                  class: "badge-" + _vm.post.category.color
+                },
+                [_vm._v(_vm._s(_vm.post.category.name))]
+              )
             : _c("span", [_vm._v("Nessuna")])
         ]),
         _vm._v(" "),
         _c("p", [_vm._v(_vm._s(_vm.post.content))]),
         _vm._v(" "),
-        _c("footer", { staticClass: "blockquote-footer" }, [
-          _vm._v(_vm._s(_vm.post.created_at))
+        _c("footer", [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.getFormattedDate(_vm.post.created_at)) +
+              "\n            "
+          )
         ])
       ])
     ])
