@@ -20,7 +20,7 @@ class Post extends Model
 
     //un post ha mo9lti tag
     public function tags() {
-        return $this->belongsToMany('App\Models\Tags');
+        return $this->belongsToMany('App\Models\Tag');
     }
 }
 

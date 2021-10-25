@@ -43,7 +43,26 @@ Laravel, specificato "submit" come type del nostro button e indicando nell'actio
                  @endif value="{{ $category->id }}">{{ $category->name }}</option>
          @endforeach
      </select>
+
  </div>
+
+ <div class="mb-3 px-4">
+     <fieldset>
+         <h5>Tags</h5>
+         @foreach ($tags as $tag)
+             <div class="form-check form-check-inline">
+                 <input class="form-check-input" type="checkbox" id="{{ $loop->iteration }}"
+                     value="{{ $tag->id }}" name="tags[]" @if (in_array($tag->id, old('tags', $tagIds ?? [])))
+                 checked
+         @endif>
+         {{-- mettiamo tag[] in modo tale che ci restitusci un array con i valori "checckati" --}}
+         <label class="form-check-label" for="{{ $loop->iteration }}">{{ $tag->name }}</label>
+ </div>
+ @endforeach
+ </fieldset>
+ </div>
+
+
  <div class="col-12 text-center my-4">
      <button type="submit" class="btn btn-dark">@yield('aggiungi-modifica')</button>
  </div>

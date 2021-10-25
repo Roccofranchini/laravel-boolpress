@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -17,8 +19,9 @@ class PostController extends Controller
     public function index()
     {   
         $categories = Category::all();
+        $tags = Tag::all();
         $posts = Post::paginate(10); 
-        return view('admin.posts.index', compact('posts', 'categories'));
+        return view('admin.posts.index', compact('posts', 'categories', 'tags'));
     }
 
     /**
@@ -31,9 +34,10 @@ class PostController extends Controller
         //creiamo un'istanza vuota per gestire il doppio form per creare/modificare gli elementi
         $post = new Post();
         $categories = Category::all();
+        $tags = Tag::all();
 
         // Per creare una nuova entità restituiamo una view create con l'apposito form
-        return view('admin.posts.create', compact('post', 'categories'));
+        return view('admin.posts.create', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -49,7 +53,8 @@ class PostController extends Controller
             'title' => 'required|string|unique:posts|max:50',
             'content' => 'required|string',
             'price' => 'string',
-            'category-id' => 'nullable|exists:categories,id'
+            'category-id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
             //se selezioniamo una delle categorie del db metterà l'id di questa, altrimenti sarà null
         ],
             //messagi degli errori
@@ -63,12 +68,19 @@ class PostController extends Controller
         //creiamo una nuova istanza
         $post = new Post();
         //la rempiamo con i dati ricevuti
-        // $post->fill($data);
+        $post->fill($data);
+        //creiamo lo slug
+        $post->slug = Str::slug($post->title, '-');
         //salviamo
-        // $post->save();
-
+        $post->save();
+        
         //OPPURE
-        $post = Post::create($data);
+        //$post = Post::create($data);
+        
+        //se ho dei tags, creo la relazione
+        if (array_key_exists('tags', $data)) $post->tags()->attach($data['tags']);
+        
+
         //restituiamo la view della nuova entità creata
         return redirect()->route('admin.posts.show', $post-> id);
     }
@@ -93,7 +105,11 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+
+        //recupero l'id del post da editare
+        $tagIds = $post->tags->pluck('id')->toarray();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags', 'tagIds'));
     }
 
     /**

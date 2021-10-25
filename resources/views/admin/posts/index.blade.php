@@ -11,6 +11,7 @@
                 <tr>
                     <th scope="col">Title</th>
                     <th scope="col">Categoria</th>
+                    <th scope="col">Tag</th>
                     <th scope="col">Pubblicato il</th>
                     <th scope="col"></th>
                 </tr>
@@ -28,17 +29,25 @@
                             @endif
                         </td>
                         <td>
+                            @forelse ($post->tags as $tag)
+                                <span class="badge badge-pill"
+                                    style="background-color: {{ $tag->color }}">{{ $tag->name }}</span>
+                            @empty
+
+                            @endforelse
+                        </td>
+                        <td>
                             {{ $post->created_at }}
                         </td>
-                        <td class="text-right">
+                        <td class="d-flex">
+                            <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-success">Modifica</a>
+                            <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary mx-2">Mostra</a>
                             <form method="POST" action="{{ route('admin.posts.destroy', $post->id) }}"
                                 class="delete-form d-inline-block" data-post="{{ $post->title }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger ms-2">Delete</button>
                             </form>
-                            <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-success mx-2">Modifica</a>
-                            <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary">Mostra</a>
                         </td>
                     </tr>
                 @empty
