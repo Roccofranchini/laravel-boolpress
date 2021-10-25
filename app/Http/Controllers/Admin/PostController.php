@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -121,7 +122,25 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        // VALIDAZIONE
+        $request->validate([
+            'title' => ['required', 'string', Rule::unique('posts')->ignore($post->id), 'min:3'],
+            'content' => 'required|string',
+            'price' => 'string',
+            'category-id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
+            //se selezioniamo una delle categorie del db metterà l'id di questa, altrimenti sarà null
+        ],
+            //messagi degli errori
+        [
+            'required' =>"You must fill the :attribute field",
+            'title.unique' => "Il titolo '$request->title' è già stato usato"
+        ]);
+
         $data = $request->all();
+
+        if(!array_key_exists('tags', $data))- $post->tags->detach();
+        else $post->tags()->sync($data['tags']);
 
         $post->update($data);
         return view('admin.posts.show', compact('post'));

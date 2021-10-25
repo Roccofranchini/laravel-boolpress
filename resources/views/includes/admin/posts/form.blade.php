@@ -51,11 +51,11 @@ Laravel, specificato "submit" come type del nostro button e indicando nell'actio
          <h5>Tags</h5>
          @foreach ($tags as $tag)
              <div class="form-check form-check-inline">
-                 <input class="form-check-input" type="checkbox" id="{{ $loop->iteration }}"
+                 <input class="form-check-input" type="checkbox" id="{{ $loop->iteration }}" {{-- controlla innanzititto se c'è una vecchia richiesta (old) con 'tags', in quel caso cerca l'Id lì, altrimenti cerca nel tagIds (che sono i valori checckati gia salvati nel database ) alrtimenti metti un array vuoto --}}
                      value="{{ $tag->id }}" name="tags[]" @if (in_array($tag->id, old('tags', $tagIds ?? [])))
                  checked
          @endif>
-         {{-- mettiamo tag[] in modo tale che ci restitusci un array con i valori "checckati" --}}
+         {{-- mettiamo tag[] in modo tale che ci restitusca un array con i valori "checckati" --}}
          <label class="form-check-label" for="{{ $loop->iteration }}">{{ $tag->name }}</label>
  </div>
  @endforeach
