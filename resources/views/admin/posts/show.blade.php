@@ -7,14 +7,25 @@
             <div class="card-body">
                 <h5 class="card-title">
                     <address>Categoria: @if ($post->category)
-                            {{ $post->category->name }}
+                            <span
+                                class="badge badge-pill badge-{{ $post->category->color }}">{{ $post->category->name }}</span>
                         @else
                             Nessuna categoria
                         @endif
                     </address>
                 </h5>
                 <p class="card-text">{{ $post->content }}</p>
-                <a href="{{ URL::previous() }}" class="btn btn-primary ml-5">Indietro</a>
+                <div class="d-flex justify-content-between">
+                    <a href="{{ URL::previous() }}" class="btn btn-primary">Indietro</a>
+                    <div class="card-tags">
+                        @if ($post->tags)
+                            @foreach ($post->tags as $tag)
+                                <span class="badge badge-pill"
+                                    style="background-color: {{ $tag->color }}">{{ $tag->name }}</span>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </div>
