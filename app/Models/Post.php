@@ -17,5 +17,10 @@ class Post extends Model
     {
         return $this->belongsTo('App\Models\Category');
     }
+
+    //un post ha mo9lti tag
+    public function tags() {
+        return $this->belongsToMany('App\Models\Tags');
+    }
 }
 
