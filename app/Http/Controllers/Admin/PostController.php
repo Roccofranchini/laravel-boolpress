@@ -74,8 +74,8 @@ class PostController extends Controller
         //creiamo lo slug
         $post->slug = Str::slug($post->title, '-');
         //per salvare l'img con storage
-        $img_path = Storage::put('uploads', $data['image']);
-        $post->cover = $img_path;
+        $img_path = Storage::put('public', $data['image']);
+        $post->image = $img_path;
         //salviamo
         $post->save();
         
@@ -142,13 +142,13 @@ class PostController extends Controller
         ]);
 
         $data = $request->all();
+        $post->fill($data);
+        $img_path = Storage::put('public', $data['image']);
+        $post->image = $img_path;
 
-        if(!array_key_exists('tags', $data))- $post->tags->detach();
+        if(!array_key_exists('tags', $data)) $post->tags()->detach();
         else $post->tags()->sync($data['tags']);
 
-        $post->fill($data);
-        $img_path = Storage::put('uploads', $data['image']);
-        $post->cover = $img_path;
         $post->save();
         return view('admin.posts.show', compact('post'));
     }

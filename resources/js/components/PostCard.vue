@@ -16,6 +16,12 @@
                     <span v-else>Nessuna</span>
                 </h4>
                 <p>{{ post.content }}</p>
+                <img
+                    v-if="post.image !== null"
+                    class="img-fluid post-img"
+                    :src="'./storage/' + post.image"
+                    alt="postimg"
+                />
                 <footer>
                     {{ getFormattedDate(post.created_at) }}
                 </footer>
@@ -41,4 +47,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="scss">
+.post-img {
+    max-width: 100%;
+    height: auto;
+}
+</style>
