@@ -56,7 +56,8 @@ class PostController extends Controller
             'content' => 'required|string',
             'price' => 'string',
             'category-id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id'
+            'tags' => 'nullable|exists:tags,id',
+            'image' => 'nullable|image',
             //se selezioniamo una delle categorie del db metterà l'id di questa, altrimenti sarà null
         ],
             //messagi degli errori
@@ -132,7 +133,8 @@ class PostController extends Controller
             'content' => 'required|string',
             'price' => 'string',
             'category-id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id'
+            'tags' => 'nullable|exists:tags,id',
+            'image' => 'nullable|image'
             //se selezioniamo una delle categorie del db metterà l'id di questa, altrimenti sarà null
         ],
             //messagi degli errori
