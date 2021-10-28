@@ -28,7 +28,7 @@ Laravel, specificato "submit" come type del nostro button e indicando nell'actio
 
  <div class="mb-3 px-4">
      <label for="image" class="form-label">Image</label>
-     <input type="file" class="form-control-file" id="image" name="image" value="{{ old('image', $post->image) }}">
+     <input type="file" class="form-control-file" id="image" name="image">
  </div>
  <div class="mb-3 col-8  px-4">
      <label for="content" class="form-label">Descrizione</label>

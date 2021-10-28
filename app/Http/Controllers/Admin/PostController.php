@@ -57,7 +57,6 @@ class PostController extends Controller
             'price' => 'string',
             'category-id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|exists:tags,id',
-            'image' => 'nullable|image',
             //se selezioniamo una delle categorie del db metterà l'id di questa, altrimenti sarà null
         ],
             //messagi degli errori
@@ -146,11 +145,11 @@ class PostController extends Controller
         $post->fill($data);
         
     
-        if (in_array('image', $data)) {
+       
+        dd($data['image']);
             # code...
-            $img_path = Storage::put('public', $data['image']);
-            $post->image = $img_path;
-        }
+        $img_path = Storage::put('public', $data['image']);
+        $post->image = $img_path;
 
         if(!array_key_exists('tags', $data)) $post->tags()->detach();
         else $post->tags()->sync($data['tags']);
