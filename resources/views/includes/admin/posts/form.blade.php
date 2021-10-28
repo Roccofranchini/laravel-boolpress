@@ -10,10 +10,12 @@ Laravel, specificato "submit" come type del nostro button e indicando nell'actio
      </div>
  @endif
  @if ($post->exists)
-     <form class="" method='POST' action="{{ route('admin.posts.update', $post->id) }}">
+     <form class="" method='POST' enctype="multipart/form-data"
+         action="{{ route('admin.posts.update', $post->id) }}">
          @method('PATCH')
      @else
-         <form class="row" method='POST' action="{{ route('admin.posts.store') }}">
+         <form class="row" method='POST' enctype="multipart/form-data"
+             action="{{ route('admin.posts.store') }}">
  @endif
  @csrf
  <div class="mb-3 col-6 px-4">
@@ -22,10 +24,11 @@ Laravel, specificato "submit" come type del nostro button e indicando nell'actio
          value="{{ old('title', $post->title) }}" placeholder="">
      <div class="invalid-feedback">Inserire il titolo del Post</div>
  </div>
- <div class="mb-3 col-6 px-4">
+
+
+ <div class="mb-3 px-4">
      <label for="image" class="form-label">Image</label>
-     <input type="text" class="form-control" id="image" name="image" value="{{ old('image', $post->image) }}"
-         placeholder="">
+     <input type="file" class="form-control-file" id="image" name="image" value="{{ old('image', $post->image) }}">
  </div>
  <div class="mb-3 col-8  px-4">
      <label for="content" class="form-label">Descrizione</label>

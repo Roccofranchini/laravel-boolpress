@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -72,6 +73,9 @@ class PostController extends Controller
         $post->fill($data);
         //creiamo lo slug
         $post->slug = Str::slug($post->title, '-');
+        //per salvare l'img con storage
+        $img_path = Storage::put('uploads', $data['image']);
+        $post->cover = $img_path;
         //salviamo
         $post->save();
         
@@ -142,7 +146,10 @@ class PostController extends Controller
         if(!array_key_exists('tags', $data))- $post->tags->detach();
         else $post->tags()->sync($data['tags']);
 
-        $post->update($data);
+        $post->fill($data);
+        $img_path = Storage::put('uploads', $data['image']);
+        $post->cover = $img_path;
+        $post->save();
         return view('admin.posts.show', compact('post'));
     }
 
