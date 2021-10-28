@@ -22,8 +22,20 @@
                     :src="'./storage/' + post.image"
                     alt="postimg"
                 />
-                <footer>
-                    {{ getFormattedDate(post.created_at) }}
+                <footer class="d-flex justify-content-between">
+                    <span>{{ getFormattedDate(post.created_at) }}</span>
+                    <div v-if="post.tags" class="div">
+                        <ul>
+                            <li
+                                class="badge badge-pill m-2"
+                                :style="`background-color: ${tag.color}`"
+                                v-for="tag in post.tags"
+                                :key="tag.id"
+                            >
+                                {{ tag.name }}
+                            </li>
+                        </ul>
+                    </div>
                 </footer>
             </blockquote>
         </div>
@@ -51,5 +63,13 @@ export default {
 .post-img {
     max-width: 100%;
     height: auto;
+}
+footer {
+    ul {
+        display: flex;
+        li {
+            list-style-type: none;
+        }
+    }
 }
 </style>

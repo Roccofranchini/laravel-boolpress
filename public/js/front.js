@@ -2152,6 +2152,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: ["post"],
@@ -6660,7 +6672,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".post-img[data-v-1324358a] {\n  max-width: 100%;\n  height: auto;\n}", ""]);
+exports.push([module.i, ".post-img[data-v-1324358a] {\n  max-width: 100%;\n  height: auto;\n}\nfooter ul[data-v-1324358a] {\n  display: flex;\n}\nfooter ul li[data-v-1324358a] {\n  list-style-type: none;\n}", ""]);
 
 // exports
 
@@ -38884,12 +38896,36 @@ var render = function() {
             })
           : _vm._e(),
         _vm._v(" "),
-        _c("footer", [
-          _vm._v(
-            "\n                " +
-              _vm._s(_vm.getFormattedDate(_vm.post.created_at)) +
-              "\n            "
-          )
+        _c("footer", { staticClass: "d-flex justify-content-between" }, [
+          _c("span", [
+            _vm._v(_vm._s(_vm.getFormattedDate(_vm.post.created_at)))
+          ]),
+          _vm._v(" "),
+          _vm.post.tags
+            ? _c("div", { staticClass: "div" }, [
+                _c(
+                  "ul",
+                  _vm._l(_vm.post.tags, function(tag) {
+                    return _c(
+                      "li",
+                      {
+                        key: tag.id,
+                        staticClass: "badge badge-pill m-2",
+                        style: "background-color: " + tag.color
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(tag.name) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ])
+            : _vm._e()
         ])
       ])
     ])

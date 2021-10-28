@@ -133,8 +133,7 @@ class PostController extends Controller
             'content' => 'required|string',
             'price' => 'string',
             'category-id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id',
-            'image' => 'nullable|image'
+            'tags' => 'nullable|exists:tags,id'
             //se selezioniamo una delle categorie del db metterà l'id di questa, altrimenti sarà null
         ],
             //messagi degli errori
@@ -145,8 +144,13 @@ class PostController extends Controller
 
         $data = $request->all();
         $post->fill($data);
-        $img_path = Storage::put('public', $data['image']);
-        $post->image = $img_path;
+        
+    
+        if (in_array('image', $data)) {
+            # code...
+            $img_path = Storage::put('public', $data['image']);
+            $post->image = $img_path;
+        }
 
         if(!array_key_exists('tags', $data)) $post->tags()->detach();
         else $post->tags()->sync($data['tags']);
